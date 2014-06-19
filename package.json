@@ -1,0 +1,35 @@
+{
+  "name": "memento-client",
+  "version": "0.0.0",
+  "description": "wayback machine client",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jarofghosts/memento-client.git"
+  },
+  "keywords": [
+    "internet",
+    "archive",
+    "wayback",
+    "machine",
+    "memento",
+    "client"
+  ],
+  "author": "jesse keane <me@jessekeane.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jarofghosts/memento-client/issues"
+  },
+  "homepage": "https://github.com/jarofghosts/memento-client",
+  "dependencies": {
+    "concat-stream": "^1.4.6",
+    "http-link": "^0.3.0",
+    "hyperquest": "^0.3.0"
+  }
+}
