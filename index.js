@@ -18,6 +18,7 @@ function memento(url, timestamp, cb) {
 
   function parseResponse(err, res) {
     if(err) return cb(err)
+    if(!res.headers.link || !res.headers.link.length) return cb(null, [])
 
     cb(null, linkParser(res.headers.link).filter(nonMementos))
   }
