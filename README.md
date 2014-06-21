@@ -1,6 +1,9 @@
 memento-client
 ====
 
+[![Build Status](http://img.shields.io/travis/jarofghosts/memento-client.svg?style=flat)](https://travis-ci.org/jarofghosts/memento-client)
+[![npm install](http://img.shields.io/npm/dm/memento-client.svg?style=flat)](https://www.npmjs.org/package/memento-client)
+
 simple interface to the wayback machine
 
 ## usage
