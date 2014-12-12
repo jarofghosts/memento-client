@@ -28,11 +28,11 @@
   },
   "homepage": "https://github.com/jarofghosts/memento-client",
   "dependencies": {
-    "concat-stream": "^1.4.6",
     "http-link": "^0.3.0",
     "hyperquest": "^0.3.0"
   },
   "devDependencies": {
+    "portfinder": "^0.2.1",
     "tape": "^2.13.3"
   }
 }
