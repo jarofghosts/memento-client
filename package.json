@@ -1,6 +1,6 @@
 {
   "name": "memento-client",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "wayback machine client",
   "main": "index.js",
   "directories": {
