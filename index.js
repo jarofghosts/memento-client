@@ -3,7 +3,7 @@ var linkParser = require('http-link').parse
 
 var formatTime = require('./lib/format-time')
 
-var GATE_URL = 'http://web.archive.org/web/'
+var GATE_URL = 'http://web.archive.org/web/timemap/link/'
 
 module.exports = memento
 
@@ -33,7 +33,7 @@ function memento(url, opts, cb) {
   }
 
   function getAll() {
-    request(gateway + 'timemap/link/' + url, parseTimemaps)
+    request(gateway + url, parseTimemaps)
   }
 
   function parseTimemaps(err, res) {
