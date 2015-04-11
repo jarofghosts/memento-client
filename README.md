@@ -24,9 +24,9 @@ function list2010(err, mementos) {
   console.log(mementos) // all found from 2010
 }
 
-// also optionally provide your own host! (defaults to the wayback machine)
+// also optionally provide your own host's timemap! (defaults to the wayback machine)
 
-memento(url, {host: 'http://some-other-memento-provider'}, getCustom)
+memento(url, {host: 'http://some-other-memento-provider/timemap'}, getCustom)
 
 function getCustom(err, mementos) {
   // ta-da!

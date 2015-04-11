@@ -27,7 +27,7 @@ test('makes request correctly', function(t) {
 
     function makeRequest() {
       var opts = {
-          host: 'http://localhost:' + port + '/'
+          host: 'http://localhost:' + port + '/timemap/link/'
       }
 
       memento('http://herp.derp', opts, testResponse)
