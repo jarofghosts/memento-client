@@ -29,7 +29,12 @@ function memento(url, opts, cb) {
     if(err) return cb(err)
     if(!res.headers.link || !res.headers.link.length) return cb(null, [])
 
-    cb(null, linkParser(res.headers.link).filter(nonMementos))
+    try {
+      var links = linkParser(res.headers.link).filter(nonMementos);
+      cb(null, links);
+    } catch (e) {
+      cb(e);
+    }
   }
 
   function getAll() {
@@ -48,7 +53,12 @@ function memento(url, opts, cb) {
     res.on('end', function() {
       if(!result || !result.length) return cb(null, [])
 
-      cb(null, linkParser(result))
+      try {
+        var links = linkParser(result);
+        cb(null, links);
+      } catch (e) {
+        cb(e);
+      }
     })
   }
 }
