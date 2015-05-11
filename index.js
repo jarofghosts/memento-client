@@ -43,6 +43,9 @@ function memento(url, opts, cb) {
 
   function parseTimemaps(err, res) {
     if(err) return cb(err)
+    if (res.statusCode !== 200) {
+      return cb(null, []);
+    }
 
     var result = ''
 
