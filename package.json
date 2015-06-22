@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/jarofghosts/memento-client",
   "dependencies": {
+    "concat-stream": "^1.5.0",
     "http-link": "^0.3.0",
     "hyperquest": "^0.3.0"
   },

@@ -1,4 +1,5 @@
 var http = require('http')
+  , util = require('util')
 
 var findPort = require('portfinder').getPort
   , test = require('tape')
@@ -41,6 +42,66 @@ test('makes request correctly', function(t) {
 
   function testResponse(err, res) {
     t.deepEqual(res, [])
+    server.close()
+  }
+})
+
+test('returns empty array on 404', function(t) {
+  t.plan(1)
+
+  var server
+
+  findPort(makeServer)
+
+  function makeServer(err, port) {
+    server = createServer(testRequest, port, makeRequest)
+
+    function makeRequest() {
+      var opts = {
+          host: 'http://localhost:' + port + '/timemap/link/'
+      }
+
+      memento('http://herp.derp', opts, testResponse)
+    }
+
+    function testRequest(req, res) {
+      res.writeHead(404)
+      res.end()
+    }
+  }
+
+  function testResponse(err, res) {
+    t.deepEqual(res, [])
+    server.close()
+  }
+})
+
+test('returns err on non-200/404 response', function(t) {
+  t.plan(1)
+
+  var server
+
+  findPort(makeServer)
+
+  function makeServer(err, port) {
+    server = createServer(testRequest, port, makeRequest)
+
+    function makeRequest() {
+      var opts = {
+          host: 'http://localhost:' + port + '/timemap/link/'
+      }
+
+      memento('http://herp.derp', opts, testResponse)
+    }
+
+    function testRequest(req, res) {
+      res.writeHead(500)
+      res.end()
+    }
+  }
+
+  function testResponse(err, res) {
+    t.ok(util.isError(err))
     server.close()
   }
 })

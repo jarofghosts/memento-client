@@ -1,4 +1,5 @@
 var linkParser = require('http-link').parse
+  , concat = require('concat-stream')
   , request = require('hyperquest')
 
 var formatTime = require('./lib/format-time')
@@ -26,14 +27,18 @@ function memento(url, opts, cb) {
   request(gateway + url, {headers: headers}, parseResponse)
 
   function parseResponse(err, res) {
-    if(err) return cb(err)
-    if(!res.headers.link || !res.headers.link.length) return cb(null, [])
+    if(err) {
+      return cb(err)
+    }
+
+    if(!res.headers.link || !res.headers.link.length) {
+      return cb(null, [])
+    }
 
     try {
-      var links = linkParser(res.headers.link).filter(nonMementos);
-      cb(null, links);
+      cb(null, linkParser(res.headers.link).filter(nonMementos))
     } catch (e) {
-      cb(e);
+      cb(e)
     }
   }
 
@@ -42,27 +47,29 @@ function memento(url, opts, cb) {
   }
 
   function parseTimemaps(err, res) {
-    if(err) return cb(err)
-    if (res.statusCode !== 200) {
-      return cb(null, []);
+    if(err) {
+      return cb(err)
     }
 
-    var result = ''
+    if(res.statusCode === 404) {
+      return cb(null, [])
+    } else if(res.statusCode !== 200) {
+      return cb(new Error('request failure ' + res.statusCode))
+    }
 
-    res.on('data', function(data) {
-      result += data
-    })
+    res.pipe(concat(parseLinks))
 
-    res.on('end', function() {
-      if(!result || !result.length) return cb(null, [])
+    function parseLinks(result) {
+      if(!result || !result.length) {
+        return cb(null, [])
+      }
 
       try {
-        var links = linkParser(result);
-        cb(null, links);
+        cb(null, linkParser(result))
       } catch (e) {
-        cb(e);
+        cb(e)
       }
-    })
+    }
   }
 }
 
