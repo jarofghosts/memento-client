@@ -64,6 +64,8 @@ function memento (url, opts, cb) {
         return cb(null, [])
       }
 
+      result = result.toString()
+
       try {
         cb(null, linkParser(result))
       } catch (e) {
